@@ -10,8 +10,8 @@ export default function Footer() {
       transition={{ delay: 0.5 }}
     >
       <div className="container mx-auto px-2 md:px-10">
-        <div className="flex flex-col md:flex-row justify-center text-center gap-2 md:gap-10 border-t-[1px] border-cool-green mt-10 pt-5">
-          <p>&copy; 2025 _________. Sva prava zadržana.</p>
+        <div className="flex flex-col md:flex-row justify-center text-center gap-2 md:gap-10 border-t-[1px] border-primary mt-10 pt-5">
+          <p>&copy; 2025 Klupko Klupče. Sva prava zadržana.</p>
           <a href="https://www.manikamwebsolutions.com/" target="_blank">
             izrada sajta:{" "}
             <span className="font-bold text-primary"> ManikamWebSolutions</span>

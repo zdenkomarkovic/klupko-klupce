@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Sakrij header i footer na /studio ruti */
+body[data-path="/studio"] header,
+body[data-path="/studio"] footer,
+body[data-path="/studio"] .button-to-top {
+  display: none !important;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -22,7 +29,7 @@ h3 {
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 6, 97%, 49%;
+    --primary: 31, 94%, 55%;
     --primary-foreground: 0 0% 98%;
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
