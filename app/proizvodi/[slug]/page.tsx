@@ -96,19 +96,6 @@ export default function CategoryPage({ params }: PageProps) {
       {/* Proizvodi u kategoriji */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary">
-              Proizvodi u kategoriji
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              {products.length} proizvoda dostupno
-            </p>
-          </motion.div>
 
           {products.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
