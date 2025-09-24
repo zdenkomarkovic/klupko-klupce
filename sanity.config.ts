@@ -10,15 +10,6 @@ export default defineConfig({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
   
-  // Ograničenja za upload slika
-  studio: {
-    options: {
-      asset: {
-        maxSize: 0.5 * 1024 * 1024, // 500KB
-        accept: 'image/jpeg,image/png,image/webp'
-      }
-    }
-  },
   
   plugins: [
     structureTool({

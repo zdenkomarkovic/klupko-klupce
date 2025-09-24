@@ -56,7 +56,7 @@ export default defineType({
               description: 'Važno za SEO i pristupačnost'
             }
           ],
-          validation: (Rule) => Rule.custom(async (image, context) => {
+          validation: (Rule) => Rule.custom(async (image: any, context) => {
             if (!image || !image.asset) return true
             
             try {
