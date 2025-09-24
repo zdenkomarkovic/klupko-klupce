@@ -49,7 +49,7 @@ export default function ProizvodiPage() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {categories.map((category: any, index: number) => (
+            {categories.map((category: { _id: string; title: string; slug: { current: string }; description: string; image?: { asset: { _ref: string } } }, index: number) => (
               <motion.div
                 key={category._id}
                 className="bg-background rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow"

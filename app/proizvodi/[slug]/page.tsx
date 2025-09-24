@@ -112,7 +112,7 @@ export default function CategoryPage({ params }: PageProps) {
 
           {products.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {products.map((product: any, index: number) => (
+              {products.map((product: { _id: string; title: string; slug: { current: string }; description: string; images: Array<{ _key: string; asset: { _ref: string } }>; price?: number }, index: number) => (
                 <Link key={product._id} href={`/proizvodi/${resolvedParams.slug}/${product.slug.current}`}>
                   <motion.div
                     className="bg-background rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer"

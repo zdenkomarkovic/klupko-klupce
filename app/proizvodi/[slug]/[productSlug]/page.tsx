@@ -6,7 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { notFound } from "next/navigation";
 import { useEffect, useState, use } from "react";
-import { ArrowLeft, Heart, Share2, Phone } from "lucide-react";
+import { ArrowLeft, Share2, Phone } from "lucide-react";
 import ImageLightbox from "@/components/ImageLightbox";
 import { toast } from "sonner";
 
@@ -40,7 +40,7 @@ export default function ProductPage({ params }: PageProps) {
           url,
         });
         toast.success('Proizvod je podeljen!');
-      } catch (error) {
+      } catch {
         // Korisnik je otkazao podelu
         console.log('Sharing cancelled');
       }
@@ -49,7 +49,7 @@ export default function ProductPage({ params }: PageProps) {
       try {
         await navigator.clipboard.writeText(url);
         toast.success('Link je kopiran u clipboard!');
-      } catch (error) {
+      } catch {
         // Fallback za starije browsere
         const textArea = document.createElement('textarea');
         textArea.value = url;
@@ -170,7 +170,7 @@ export default function ProductPage({ params }: PageProps) {
               {/* Thumbnail galerija */}
               {maxImages > 1 && (
                 <div className="grid grid-cols-5 gap-2">
-                  {images.slice(0, maxImages).map((image: any, index: number) => (
+                  {images.slice(0, maxImages).map((image: { _key: string; asset: { _ref: string } }, index: number) => (
                     <motion.button
                       key={image._key}
                       className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${

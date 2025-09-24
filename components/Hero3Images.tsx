@@ -14,7 +14,7 @@ import Hero2 from "../public/hero2.jpg";
 import Hero3 from "../public/hero3.jpg";
 
 import Image from "next/image";
-import { ArrowRightIcon, PhoneIcon } from "lucide-react";
+import {  PhoneIcon } from "lucide-react";
 
 import Link from "next/link";
 

@@ -69,7 +69,7 @@ export interface Page {
   slug: {
     current: string
   }
-  content: any[] // Portable Text
+  content: unknown[] // Portable Text
   seo: {
     title?: string
     description?: string

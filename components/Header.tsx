@@ -3,18 +3,12 @@
 import Image from "next/image";
 import Logo from "../public/android-chrome-192x192.png";
 import Link from "next/link";
-import { ChevronDownIcon, MenuIcon, PhoneIcon } from "lucide-react";
+import {  PhoneIcon } from "lucide-react";
 
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+
 
 import { motion } from "framer-motion";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import DynamicNav from "./DynamicNav";
 
 
