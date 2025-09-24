@@ -1,6 +1,6 @@
 "use client";
 
-import { getCategoryBySlug, getProductsByCategory } from "@/lib/sanity";
+import { getCategoryBySlug, getProductsByCategory, Category } from "@/lib/sanity";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -15,7 +15,7 @@ interface PageProps {
 
 export default function CategoryPage({ params }: PageProps) {
   const resolvedParams = use(params);
-  const [category, setCategory] = useState(null);
+  const [category, setCategory] = useState<Category | null>(null);
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -66,10 +66,10 @@ export default function CategoryPage({ params }: PageProps) {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-primary">
-              {category.title}
+              {category?.title}
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-              {category.description}
+              {category?.description}
             </p>
           </motion.div>
 
