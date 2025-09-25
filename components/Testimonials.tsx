@@ -103,7 +103,7 @@ export default function Testimonials() {
 
               {/* Komentar */}
               <p className="text-muted-foreground leading-relaxed mb-6 italic">
-                "{testimonial.comment}"
+              &quot;{testimonial.comment}&quot;
               </p>
 
               {/* Informacije o korisniku */}

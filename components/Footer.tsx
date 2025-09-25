@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Mail, Phone, Facebook, Instagram, MapPin } from "lucide-react";
+import Link from "next/link";
 import { FaViber } from "react-icons/fa";
 
 export default function Footer() {
@@ -94,18 +95,18 @@ export default function Footer() {
           <div className="mx-auto">
             <h3 className="text-lg font-semibold text-white mb-4">Brzi linkovi</h3>
             <div className="space-y-2">
-              <a 
+              <Link 
                 href="/"
                 className="block text-sm hover:text-muted-foreground transition-colors"
               >
                 Početna
-              </a>
-              <a 
+              </Link>
+              <Link 
                 href="/#kategorije"
                 className="block text-sm hover:text-muted-foreground transition-colors"
               >
                 Proizvodi
-              </a>
+              </Link>
             </div>
           </div>
         </div>

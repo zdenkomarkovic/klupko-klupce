@@ -9,6 +9,7 @@ import { useEffect, useState, use } from "react";
 import { ArrowLeft, Share2, Phone } from "lucide-react";
 import ImageLightbox from "@/components/ImageLightbox";
 import { toast } from "sonner";
+import Head from "next/head";
 
 interface PageProps {
   params: Promise<{
@@ -28,6 +29,7 @@ export default function ProductPage({ params }: PageProps) {
 
   // Funkcija za podelu proizvoda
   const handleShare = async () => {
+    console.log('handleShare clicked');
     const url = window.location.href;
     const title = product?.title || 'Proizvod';
     const text = product?.description || 'Pogledajte ovaj proizvod';
@@ -47,6 +49,7 @@ export default function ProductPage({ params }: PageProps) {
       }
     } else {
       // Za desktop - uvek prikaži modal
+      console.log('Setting showShareModal to true');
       setShowShareModal(true);
     }
   };
@@ -92,7 +95,37 @@ export default function ProductPage({ params }: PageProps) {
   const maxImages = Math.min(images.length, 5);
 
   return (
-    <div className="min-h-screen pt-20">
+    <>
+      <Head>
+        <title>{product.seo?.title || product.title} | Klupko Klupče</title>
+        <meta 
+          name="description" 
+          content={product.seo?.description || product.description || `Pogledajte ${product.title} - ručno pleteni proizvodi najvišeg kvaliteta`} 
+        />
+        {product.seo?.keywords && (
+          <meta 
+            name="keywords" 
+            content={product.seo.keywords.join(', ')} 
+          />
+        )}
+        <meta property="og:title" content={product.seo?.title || product.title} />
+        <meta property="og:description" content={product.seo?.description || product.description} />
+        <meta property="og:type" content="product" />
+        <meta property="og:url" content={typeof window !== 'undefined' ? window.location.href : ''} />
+        {images[0] && (
+          <meta property="og:image" content={`https://cdn.sanity.io/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/${images[0].asset._ref.replace('image-', '').replace('-jpg', '.jpg').replace('-png', '.png').replace('-webp', '.webp')}`} />
+        )}
+        <meta property="product:price:amount" content={product.price?.toString() || ''} />
+        <meta property="product:price:currency" content="RSD" />
+        <meta property="product:availability" content={product.inStock ? 'in stock' : 'out of stock'} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={product.seo?.title || product.title} />
+        <meta name="twitter:description" content={product.seo?.description || product.description} />
+        {images[0] && (
+          <meta name="twitter:image" content={`https://cdn.sanity.io/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/${images[0].asset._ref.replace('image-', '').replace('-jpg', '.jpg').replace('-png', '.png').replace('-webp', '.webp')}`} />
+        )}
+      </Head>
+      <div className="min-h-screen pt-20">
       {/* Breadcrumb */}
       <section className="py-4 bg-muted/30">
         <div className="container mx-auto px-4 ">
@@ -135,7 +168,7 @@ export default function ProductPage({ params }: PageProps) {
                 {images[selectedImageIndex] ? (
                   <Image
                     src={`https://cdn.sanity.io/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/${images[selectedImageIndex].asset._ref.replace('image-', '').replace('-jpg', '.jpg').replace('-png', '.png').replace('-webp', '.webp')}`}
-                    alt={product.title}
+                    alt={images[selectedImageIndex].alt || product.title}
                     fill
                     className="object-cover transition-transform group-hover:scale-105"
                     priority
@@ -159,7 +192,7 @@ export default function ProductPage({ params }: PageProps) {
               {/* Thumbnail galerija */}
               {maxImages > 1 && (
                 <div className="grid grid-cols-5 gap-2">
-                  {images.slice(0, maxImages).map((image: { _key: string; asset: { _ref: string } }, index: number) => (
+                  {images.slice(0, maxImages).map((image: { _key: string; asset: { _ref: string }; alt?: string }, index: number) => (
                     <motion.button
                       key={image._key}
                       className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all ${
@@ -173,7 +206,7 @@ export default function ProductPage({ params }: PageProps) {
                     >
                       <Image
                         src={`https://cdn.sanity.io/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/${image.asset._ref.replace('image-', '').replace('-jpg', '.jpg').replace('-png', '.png').replace('-webp', '.webp')}`}
-                        alt={`${product.title} - slika ${index + 1}`}
+                        alt={image.alt || `${product.title} - slika ${index + 1}`}
                         fill
                         className="object-cover"
                       />
@@ -277,6 +310,7 @@ export default function ProductPage({ params }: PageProps) {
         <div 
           className="fixed inset-0 bg-black/50 z-[9999] flex items-center justify-center p-4"
           onClick={() => setShowShareModal(false)}
+          style={{ display: 'flex' }}
         >
           <div 
             className="bg-white rounded-lg p-6 max-w-md w-full shadow-xl"
@@ -304,17 +338,7 @@ export default function ProductPage({ params }: PageProps) {
                       toast.success('Link je kopiran!');
                       setShowShareModal(false);
                     } else {
-                      // Fallback za starije browsere
-                      const input = document.createElement('input');
-                      input.value = window.location.href;
-                      input.style.position = 'absolute';
-                      input.style.left = '-9999px';
-                      document.body.appendChild(input);
-                      input.select();
-                      document.execCommand('copy');
-                      document.body.removeChild(input);
-                      toast.success('Link je kopiran!');
-                      setShowShareModal(false);
+                      toast.error('Kliknite na link i kopirajte ručno (Ctrl+C)');
                     }
                   } catch (error) {
                     toast.error('Kliknite na link i kopirajte ručno (Ctrl+C)');
@@ -334,7 +358,8 @@ export default function ProductPage({ params }: PageProps) {
           </div>
         </div>
       )}
-    </div>
+      </div>
+    </>
   );
 }
 
