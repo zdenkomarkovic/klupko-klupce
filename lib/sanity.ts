@@ -19,6 +19,10 @@ export interface Product {
   category: {
     _ref: string
     _type: 'reference'
+    title?: string
+    slug?: {
+      current: string
+    }
   }
   images: Array<{
     _key: string

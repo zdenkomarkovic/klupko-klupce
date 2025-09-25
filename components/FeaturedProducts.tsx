@@ -75,7 +75,7 @@ export default function FeaturedProducts() {
         {/* Grid proizvoda */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {currentProducts.map((product, index) => (
-            <Link key={product._id} href={`/proizvodi/${product.category.slug.current}/${product.slug.current}`}>
+            <Link key={product._id} href={`/proizvodi/${product.category.slug?.current || 'kategorija'}/${product.slug.current}`}>
               <motion.div
                 className="bg-background rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer h-full"
                 initial={{ opacity: 0, y: 30 }}
@@ -110,7 +110,7 @@ export default function FeaturedProducts() {
                 <div className="p-4">
                   <div className="mb-2">
                     <span className="text-sm text-muted-foreground">
-                      {product.category.title}
+                      {product.category.title || 'Kategorija'}
                     </span>
                   </div>
                   <h3 className="text-2xl font-semibold mb-2 text-primary line-clamp-2">

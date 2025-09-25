@@ -134,7 +134,7 @@ export default function ProductPage({ params }: PageProps) {
               Početna
             </Link>
             <span className="text-muted-foreground">/</span>
-            <Link href="/proizvodi" className="text-muted-foreground hover:text-primary">
+            <Link href="/#kategorije" className="text-muted-foreground hover:text-primary">
               Kategorije
             </Link>
             <span className="text-muted-foreground">/</span>
