@@ -340,7 +340,7 @@ export default function ProductPage({ params }: PageProps) {
                     } else {
                       toast.error('Kliknite na link i kopirajte ručno (Ctrl+C)');
                     }
-                  } catch (error) {
+                  } catch {
                     toast.error('Kliknite na link i kopirajte ručno (Ctrl+C)');
                   }
                 }}

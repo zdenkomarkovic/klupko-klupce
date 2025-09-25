@@ -72,7 +72,7 @@ export default function ImageLightbox({
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, currentIndex, onClose, onIndexChange]);
+  }, [isOpen, currentIndex, onClose, onIndexChange, images.length]);
 
   // Prevent body scroll when lightbox is open
   useEffect(() => {
