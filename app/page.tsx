@@ -3,7 +3,9 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Heart, Star, Users, Award, Phone, Mail, Facebook, Instagram } from "lucide-react";
+import { Heart, Star, Users, Award, Phone } from "lucide-react";
+import FeaturedProducts from "@/components/FeaturedProducts";
+import Testimonials from "@/components/Testimonials";
 import { getCategories } from "@/lib/sanity";
 import { useEffect, useState } from "react";
 import Hero3Images from "@/components/Hero3Images";
@@ -27,9 +29,9 @@ export default function Home() {
     <div className="min-h-screen">
 <Hero3Images/>
       {/* O nama sekcija */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="max-w-6xl mx-auto text-center md:px-6">
             <motion.h2 
               className="text-3xl md:text-4xl font-bold mb-8 text-primary"
               initial={{ opacity: 0, y: 30 }}
@@ -39,7 +41,7 @@ export default function Home() {
             >
               Naša Priča
             </motion.h2>
-            
+           <div className="grid grid-cols-1 md:grid-cols-2 justify-center items-center gap-4 md:gap-16">    
             <motion.div 
               className="prose prose-lg max-w-none text-muted-foreground"
               initial={{ opacity: 0, y: 30 }}
@@ -64,6 +66,16 @@ export default function Home() {
                 mekoći, izdržljivosti i hipoalergijskim svojstvima.
               </p>
             </motion.div>
+            <motion.div 
+              className="prose prose-lg max-w-none text-muted-foreground"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <Image src="/hero13.jpg" alt="handmade" width={800} height={800} className=" rounded-3xl " /> 
+            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -121,6 +133,7 @@ export default function Home() {
         </div>
       </section>
 
+
       {/* Zašto mi sekcija */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
@@ -176,9 +189,14 @@ export default function Home() {
           </div>
         </div>
       </section>
+      
+      {/* Istaknuti proizvodi */}
+      <FeaturedProducts />
+
+
 
       {/* CTA sekcija */}
-      <section className="py-20 bg-primary text-primary-foreground">
+      <section className="py-10 bg-primary text-white">
         <div className="container mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -186,135 +204,29 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
               Spremni za Saradnju?
             </h2>
-            <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-white">
               Klupko Klupče je otvoren za svaki vid saradnje. Izbor je na vama - sve ostalo je naše. 
               Kontaktirajte nas i zajedno ćemo kreirati savršen proizvod za vas.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
-                href="/kontakt"
-                className="bg-background text-foreground px-8 py-4 rounded-lg text-lg font-semibold hover:bg-background/90 transition-colors"
-              >
-                Kontaktiraj Nas
-              </Link>
+       
+ 
               <Link 
                 href="tel:+381637861086"
-                className="border-2 border-background text-background px-8 py-4 rounded-lg text-lg font-semibold hover:bg-background hover:text-foreground transition-colors flex items-center justify-center gap-2"
+                className=" w-fit mx-auto border-2 border-background text-background px-8 py-4 rounded-lg text-lg font-semibold hover:bg-background hover:text-foreground transition-colors flex items-center justify-center gap-2"
               >
                 <Phone className="w-5 h-5" />
                 063 786 1086
               </Link>
-            </div>
+        
           </motion.div>
         </div>
       </section>
+            {/* Testimonials */}
+            <Testimonials />
 
-      {/* Kontakt informacije */}
-      <section className="py-20 bg-muted/50">
-        <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary">Kontakt</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Budite u kontaktu sa nama putem različitih kanala komunikacije.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-4xl mx-auto">
-            <motion.div 
-              className="text-center p-6 bg-background rounded-lg shadow-lg"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Mail className="w-8 h-8 text-primary mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Email</h3>
-              <a 
-                href="mailto:klupkoklupce@gmail.com"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                klupkoklupce@gmail.com
-              </a>
-            </motion.div>
-
-            <motion.div 
-              className="text-center p-6 bg-background rounded-lg shadow-lg"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <Phone className="w-8 h-8 text-primary mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Telefon</h3>
-              <a 
-                href="tel:+381637861086"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                063 786 1086
-              </a>
-            </motion.div>
-
-            <motion.div 
-              className="text-center p-6 bg-background rounded-lg shadow-lg"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <Facebook className="w-8 h-8 text-primary mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Facebook</h3>
-              <a 
-                href="https://www.facebook.com/share/1BHGdCDv2s/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                Klupko Klupče
-              </a>
-            </motion.div>
-
-            <motion.div 
-              className="text-center p-6 bg-background rounded-lg shadow-lg"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-              <Instagram className="w-8 h-8 text-primary mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Instagram</h3>
-              <a 
-                href="https://www.instagram.com/klupkoklupce?igsh=MTBmd3dkMm1jM2ZhNw=="
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                @klupkoklupce
-              </a>
-            </motion.div>
-          </div>
-
-          <motion.div 
-            className="text-center mt-12"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            viewport={{ once: true }}
-          >
-            <p className="text-lg text-muted-foreground">
-              <strong>Lokacija:</strong> Zrenjanin, Srbija
-            </p>
-          </motion.div>
-        </div>
-      </section>
     </div>
   );
 }

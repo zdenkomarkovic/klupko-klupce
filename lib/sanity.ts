@@ -92,13 +92,13 @@ export const queries = {
     featured
   }`,
   
-  featuredProducts: `*[_type == "product" && featured == true] | order(_createdAt desc) [0...6] {
+  featuredProducts: `*[_type == "product" && featured == true] | order(_createdAt desc) {
     _id,
     title,
     slug,
     description,
     category->{title, slug},
-    images[0...2],
+    images,
     price,
     inStock
   }`,

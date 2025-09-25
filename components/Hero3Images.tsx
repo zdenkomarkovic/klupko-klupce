@@ -9,9 +9,9 @@ import {
 import Fade from "embla-carousel-fade";
 import Autoplay from "embla-carousel-autoplay";
 
-import Hero1 from "../public/hero1.jpg";
-import Hero2 from "../public/hero2.jpg";
-import Hero3 from "../public/hero3.jpg";
+import Hero1 from "../public/hero7.jpg";
+import Hero2 from "../public/hero6.jpg";
+import Hero3 from "../public/hero1.jpg";
 
 import Image from "next/image";
 import {  PhoneIcon } from "lucide-react";
@@ -60,9 +60,9 @@ const Hero3Images = () => {
           </CarouselItem>
         </CarouselContent>
       </Carousel>
-      <div className="relative flex flex-col items-start justify-end pb-20 text-center text-white px-4 container md:px-32 ">
+      <div className="relative flex flex-col items-start justify-end md:pb-20 pb-10 text-center text-white px-4 container md:px-32 ">
           <motion.h1 
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 text-primary"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold md:mb-6 mb-4 text-primary"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -71,7 +71,7 @@ const Hero3Images = () => {
           </motion.h1>
           
           <motion.p 
-            className="text-xl md:text-2xl lg:text-3xl mb-8 font-light"
+            className="text-xl md:text-2xl lg:text-3xl md:mb-8 mb-4 font-light"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -80,7 +80,7 @@ const Hero3Images = () => {
           </motion.p>
           
           <motion.p 
-            className="text-lg md:text-xl mb-12 max-w-5xl text-left"
+            className="text-lg md:text-xl md:mb-12 mb-4 max-w-5xl text-left"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}

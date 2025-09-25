@@ -24,6 +24,7 @@ export default function ProductPage({ params }: PageProps) {
   const [loading, setLoading] = useState(true);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
 
   // Funkcija za podelu proizvoda
   const handleShare = async () => {
@@ -45,20 +46,8 @@ export default function ProductPage({ params }: PageProps) {
         console.log('Sharing cancelled');
       }
     } else {
-      // Fallback za desktop - kopiranje linka u clipboard
-      try {
-        await navigator.clipboard.writeText(url);
-        toast.success('Link je kopiran u clipboard!');
-      } catch {
-        // Fallback za starije browsere
-        const textArea = document.createElement('textarea');
-        textArea.value = url;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        toast.success('Link je kopiran u clipboard!');
-      }
+      // Za desktop - uvek prikaži modal
+      setShowShareModal(true);
     }
   };
 
@@ -234,7 +223,7 @@ export default function ProductPage({ params }: PageProps) {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link
                     href="tel:+381637861086"
-                    className="flex-1 bg-primary text-primary-foreground px-6 py-4 rounded-lg text-lg font-semibold hover:bg-primary/90 transition-colors flex items-center justify-center gap-2"
+                    className="flex-1 bg-primary text-primary-foreground px-6 py-4 rounded-lg text-lg font-semibold hover:bg-orange-500 transition-colors flex items-center justify-center gap-2"
                   >
                     <Phone className="w-5 h-5" />
                     Pozovi za poručivanje
@@ -282,6 +271,69 @@ export default function ProductPage({ params }: PageProps) {
         onIndexChange={setSelectedImageIndex}
         productTitle={product.title}
       />
+
+      {/* Share Modal */}
+      {showShareModal && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-[9999] flex items-center justify-center p-4"
+          onClick={() => setShowShareModal(false)}
+        >
+          <div 
+            className="bg-white rounded-lg p-6 max-w-md w-full shadow-xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="text-lg font-semibold mb-4">Podeli proizvod</h3>
+            <p className="text-sm text-muted-foreground mb-4">
+              Kopirajte link ispod da podelite proizvod:
+            </p>
+            <div className="bg-gray-100 p-3 rounded border mb-4">
+              <input
+                type="text"
+                value={window.location.href}
+                readOnly
+                className="w-full bg-transparent text-sm outline-none cursor-pointer text-gray-800"
+                onClick={(e) => (e.target as HTMLInputElement).select()}
+              />
+            </div>
+            <div className="flex gap-3">
+              <button
+                onClick={async () => {
+                  try {
+                    if (navigator.clipboard) {
+                      await navigator.clipboard.writeText(window.location.href);
+                      toast.success('Link je kopiran!');
+                      setShowShareModal(false);
+                    } else {
+                      // Fallback za starije browsere
+                      const input = document.createElement('input');
+                      input.value = window.location.href;
+                      input.style.position = 'absolute';
+                      input.style.left = '-9999px';
+                      document.body.appendChild(input);
+                      input.select();
+                      document.execCommand('copy');
+                      document.body.removeChild(input);
+                      toast.success('Link je kopiran!');
+                      setShowShareModal(false);
+                    }
+                  } catch (error) {
+                    toast.error('Kliknite na link i kopirajte ručno (Ctrl+C)');
+                  }
+                }}
+                className="flex-1 bg-primary text-white px-4 py-2 rounded hover:bg-primary/90 transition-colors"
+              >
+                Kopiraj link
+              </button>
+              <button
+                onClick={() => setShowShareModal(false)}
+                className="flex-1 border border-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-50 transition-colors"
+              >
+                Zatvori
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
