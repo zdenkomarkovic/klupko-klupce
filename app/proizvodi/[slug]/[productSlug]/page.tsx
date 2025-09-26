@@ -11,7 +11,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { notFound } from "next/navigation";
 import { useEffect, useState, use } from "react";
-import { ArrowLeft, Share2, Phone, Mail } from "lucide-react";
+import { ArrowLeft, Share2, Mail } from "lucide-react";
 import ImageLightbox from "@/components/ImageLightbox";
 import { toast } from "sonner";
 import Head from "next/head";
