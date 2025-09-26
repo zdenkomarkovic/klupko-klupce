@@ -17,7 +17,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Klupko Klupče - Handmade Proizvodi od Vune | Zrenjanin",
-  description: "Klupko Klupče je brend koji se bavi handmade proizvodima od vune. Specijalizovani smo za ćebad za bebe, prekrivače za krevet, stoličarke, šal i kape, torbe i jastučnice. Koristimo antialergijsku vunicu Alize Pyffi i Alize Pyffi Fine. Zrenjanin.",
+  description:
+    "Klupko Klupče je brend koji se bavi handmade proizvodima od vune. Specijalizovani smo za ćebad za bebe, prekrivače za krevet, stoličarke, šal i kape, torbe i jastučnice. Koristimo antialergijsku vunicu Alize Pyffi i Alize Pyffi Fine. Zrenjanin.",
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -43,14 +44,15 @@ export const metadata: Metadata = {
     "Klupko Klupče",
     "vuneni proizvodi",
     "bebi proizvodi",
-    "domaći proizvodi"
+    "domaći proizvodi",
   ],
   alternates: {
-    canonical: "https://klupkoklupce.com/",
+    canonical: "https://klupkoklupce.rs/",
   },
   openGraph: {
     title: "Klupko Klupče - Handmade Proizvodi od Vune",
-    description: "Specijalizovani za handmade proizvode od vune - ćebad, prekrivači, stoličarke, šal i kape, torbe i jastučnice. Antialergijska vunica Alize Pyffi.",
+    description:
+      "Specijalizovani za handmade proizvode od vune - ćebad, prekrivači, stoličarke, šal i kape, torbe i jastučnice. Antialergijska vunica Alize Pyffi.",
     type: "website",
     locale: "sr_RS",
   },
@@ -64,79 +66,82 @@ export default function RootLayout({
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Klupko Klupče",
-    "description": "Handmade proizvodi od vune - ćebad za bebe, prekrivači za krevet, stoličarke, šal i kape, torbe i jastučnice. Ručno pleteni proizvodi od antialergijske vunice Alize Pyffi.",
-    "url": "https://klupkoklupce.com",
-    "telephone": "+381637861086",
-    "email": "klupkoklupce@gmail.com",
-    "address": {
+    name: "Klupko Klupče",
+    description:
+      "Handmade proizvodi od vune - ćebad za bebe, prekrivači za krevet, stoličarke, šal i kape, torbe i jastučnice. Ručno pleteni proizvodi od antialergijske vunice Alize Pyffi.",
+    url: "https://klupkoklupce.com",
+    telephone: "+381637861086",
+    email: "klupkoklupce@gmail.com",
+    address: {
       "@type": "PostalAddress",
-      "addressLocality": "Zrenjanin",
-      "addressCountry": "RS"
+      addressLocality: "Zrenjanin",
+      addressCountry: "RS",
     },
-    "sameAs": [
+    sameAs: [
       "https://www.facebook.com/share/1BHGdCDv2s/",
-      "https://www.instagram.com/klupkoklupce"
+      "https://www.instagram.com/klupkoklupce",
     ],
-    "foundingDate": "2025",
-    "priceRange": "$$",
-    "currenciesAccepted": "RSD",
-    "paymentAccepted": "Cash, Bank Transfer",
-    "areaServed": "Serbia",
-    "hasOfferCatalog": {
+    foundingDate: "2025",
+    priceRange: "$$",
+    currenciesAccepted: "RSD",
+    paymentAccepted: "Cash, Bank Transfer",
+    areaServed: "Serbia",
+    hasOfferCatalog: {
       "@type": "OfferCatalog",
-      "name": "Handmade Proizvodi od Vune",
-      "itemListElement": [
+      name: "Handmade Proizvodi od Vune",
+      itemListElement: [
         {
           "@type": "Offer",
-          "itemOffered": {
+          itemOffered: {
             "@type": "Product",
-            "name": "Ćebad za bebe",
-            "description": "Meki i topli ćebad pleteni od antialergijske vunice"
-          }
+            name: "Ćebad za bebe",
+            description: "Meki i topli ćebad pleteni od antialergijske vunice",
+          },
         },
         {
           "@type": "Offer",
-          "itemOffered": {
+          itemOffered: {
             "@type": "Product",
-            "name": "Prekrivači za krevet",
-            "description": "Elegantni prekrivači ručno pleteni sa pažnjom prema kvalitetu"
-          }
+            name: "Prekrivači za krevet",
+            description:
+              "Elegantni prekrivači ručno pleteni sa pažnjom prema kvalitetu",
+          },
         },
         {
           "@type": "Offer",
-          "itemOffered": {
+          itemOffered: {
             "@type": "Product",
-            "name": "Stoličarke",
-            "description": "Funkcionalne i lepe stoličarke za zaštitu nameštaja"
-          }
+            name: "Stoličarke",
+            description: "Funkcionalne i lepe stoličarke za zaštitu nameštaja",
+          },
         },
         {
           "@type": "Offer",
-          "itemOffered": {
+          itemOffered: {
             "@type": "Product",
-            "name": "Šal i kape",
-            "description": "Modni dodaci koji zagrevaju tokom hladnih dana"
-          }
+            name: "Šal i kape",
+            description: "Modni dodaci koji zagrevaju tokom hladnih dana",
+          },
         },
         {
           "@type": "Offer",
-          "itemOffered": {
+          itemOffered: {
             "@type": "Product",
-            "name": "Torbe",
-            "description": "Praktične i elegantne torbe pletene od kvalitetne vunice"
-          }
+            name: "Torbe",
+            description:
+              "Praktične i elegantne torbe pletene od kvalitetne vunice",
+          },
         },
         {
           "@type": "Offer",
-          "itemOffered": {
+          itemOffered: {
             "@type": "Product",
-            "name": "Jastučnice",
-            "description": "Meke jastučnice koje dodaju udobnost i stil"
-          }
-        }
-      ]
-    }
+            name: "Jastučnice",
+            description: "Meke jastučnice koje dodaju udobnost i stil",
+          },
+        },
+      ],
+    },
   };
 
   return (

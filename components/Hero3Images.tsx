@@ -9,12 +9,12 @@ import {
 import Fade from "embla-carousel-fade";
 import Autoplay from "embla-carousel-autoplay";
 
-import Hero1 from "../public/hero7.jpg";
-import Hero2 from "../public/hero6.jpg";
-import Hero3 from "../public/hero1.jpg";
+import Hero1 from "../public/hero1.jpg";
+import Hero2 from "../public/hero2.jpg";
+import Hero3 from "../public/hero3.jpg";
 
 import Image from "next/image";
-import {  PhoneIcon } from "lucide-react";
+import { PhoneIcon } from "lucide-react";
 
 import Link from "next/link";
 
@@ -61,55 +61,56 @@ const Hero3Images = () => {
         </CarouselContent>
       </Carousel>
       <div className="relative flex flex-col items-start justify-end md:pb-20 pb-10 text-center text-white px-4 container md:px-32 ">
-          <motion.h1 
-            className="text-4xl md:text-6xl lg:text-7xl font-bold md:mb-6 mb-4 text-primary"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+        <motion.h1
+          className="text-4xl md:text-6xl lg:text-7xl font-bold md:mb-6 mb-4 text-primary"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          Klupko Klupče
+        </motion.h1>
+
+        <motion.p
+          className="text-xl md:text-2xl lg:text-3xl md:mb-8 mb-4 font-light"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          Handmade Proizvodi od Vune
+        </motion.p>
+
+        <motion.p
+          className="text-lg md:text-xl md:mb-12 mb-4 max-w-5xl text-left"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          Specijalizovani za ručno pletenje kvalitetnih proizvoda od
+          antialergijske vunice Alize Pyffi. Od ćebadi za bebe do elegantnih
+          torbi - sve ručno rađeno sa ljubavlju.
+        </motion.p>
+
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4 justify-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          <Link
+            href="/#kategorije"
+            className="bg-primary text-primary-foreground px-4 md:px-6 py-2 md:py-3 rounded-xl text-lg font-semibold hover:bg-orange-500 transition-colors"
           >
-            Klupko Klupče
-          </motion.h1>
-          
-          <motion.p 
-            className="text-xl md:text-2xl lg:text-3xl md:mb-8 mb-4 font-light"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            Pogledaj Proizvode
+          </Link>
+          <Link
+            href="tel:+381637861086"
+            className="border-2 border-white flex gap-2 items-center justify-center text-white px-4 md:px-6 py-2 md:py-3 rounded-xl text-lg font-semibold hover:bg-white hover:text-black transition-colors"
           >
-            Handmade Proizvodi od Vune
-          </motion.p>
-          
-          <motion.p 
-            className="text-lg md:text-xl md:mb-12 mb-4 max-w-5xl text-left"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            Specijalizovani za ručno pletenje kvalitetnih proizvoda od antialergijske vunice Alize Pyffi. 
-            Od ćebad za bebe do elegantnih torbi - sve ručno rađeno sa ljubavlju.
-          </motion.p>
-          
-          <motion.div 
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            <Link 
-              href="/#kategorije"
-              className="bg-primary text-primary-foreground px-4 md:px-6 py-2 md:py-3 rounded-xl text-lg font-semibold hover:bg-orange-500 transition-colors"
-            >
-              Pogledaj Proizvode
-            </Link>
-            <Link 
-              href="tel:+381637861086"
-              className="border-2 border-white flex gap-2 items-center justify-center text-white px-4 md:px-6 py-2 md:py-3 rounded-xl text-lg font-semibold hover:bg-white hover:text-black transition-colors"
-            >
-              <PhoneIcon className="w-5 h-5" />
-              Pozovite nas
-              </Link>
-          </motion.div>
-        </div>
+            <PhoneIcon className="w-5 h-5" />
+            Pozovite nas
+          </Link>
+        </motion.div>
+      </div>
     </div>
   );
 };

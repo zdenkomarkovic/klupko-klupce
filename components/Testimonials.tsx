@@ -18,43 +18,49 @@ const testimonials: Testimonial[] = [
     name: "Ana Petrović",
     location: "Beograd",
     rating: 5,
-    comment: "Prekrasni proizvodi! Kvalitet je odličan, a rad je brz i profesionalan. Definitivno ću se ponovo obratiti za sledeće narudžbine."
+    comment:
+      "Prekrasni proizvodi! Kvalitet je odličan, a rad je brz i profesionalan. Definitivno ću se ponovo obratiti za sledeće narudžbine.",
   },
   {
     id: 2,
     name: "Marko Jovanović",
     location: "Novi Sad",
     rating: 5,
-    comment: "Ručno pleteni proizvodi su stvarno umetnost. Pažnja prema detaljima je izuzetna, a cene su veoma pristupačne. Preporučujem svima!"
+    comment:
+      "Ručno pleteni proizvodi su stvarno umetnost. Pažnja prema detaljima je izuzetna, a cene su veoma pristupačne. Preporučujem svima!",
   },
   {
     id: 3,
     name: "Jelena Nikolić",
     location: "Niš",
     rating: 5,
-    comment: "Kupila sam nekoliko proizvoda za moju decu i svi su oduševljeni. Kvalitet je vrhunski, a dizajn je moderan i lep. Hvala!"
+    comment:
+      "Kupila sam nekoliko proizvoda za moju decu i svi su oduševljeni. Kvalitet je vrhunski, a dizajn je moderan i lep. Hvala!",
   },
   {
     id: 4,
     name: "Stefan Đorđević",
     location: "Kragujevac",
     rating: 5,
-    comment: "Odličan rad! Proizvodi su tačno onakvi kakve sam želeo. Komunikacija je bila brza i jasna, a dostava je stigla na vreme."
+    comment:
+      "Odličan rad! Proizvodi su tačno onakvi kakve sam želeo. Komunikacija je bila brza i jasna, a dostava je stigla na vreme.",
   },
   {
     id: 5,
     name: "Milica Stojanović",
     location: "Subotica",
     rating: 5,
-    comment: "Prelepi proizvodi koji donose toplinu u naš dom. Kvalitet materijala je izuzetan, a ručni rad se vidi u svakom detalju."
+    comment:
+      "Prelepi proizvodi koji donose toplinu u naš dom. Kvalitet materijala je izuzetan, a ručni rad se vidi u svakom detalju.",
   },
   {
     id: 6,
     name: "Petar Milosavljević",
     location: "Čačak",
     rating: 5,
-    comment: "Profesionalan pristup i odličan kvalitet. Proizvodi su još lepši uživo nego na slikama. Definitivno ću preporučiti prijateljima."
-  }
+    comment:
+      "Profesionalan pristup i odličan kvalitet. Proizvodi su još lepši uživo nego na slikama. Definitivno ću preporučiti prijateljima.",
+  },
 ];
 
 export default function Testimonials() {
@@ -62,7 +68,7 @@ export default function Testimonials() {
     <section className="py-20 bg-gradient-to-br from-gray-200 via-white to-gray-200">
       <div className="container mx-auto px-4">
         {/* Naslov sekcije */}
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -97,13 +103,16 @@ export default function Testimonials() {
               {/* Ocena */}
               <div className="flex items-center mb-4">
                 {Array.from({ length: testimonial.rating }, (_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                  <Star
+                    key={i}
+                    className="w-5 h-5 text-yellow-400 fill-current"
+                  />
                 ))}
               </div>
 
               {/* Komentar */}
               <p className="text-muted-foreground leading-relaxed mb-6 italic">
-              &quot;{testimonial.comment}&quot;
+                &quot;{testimonial.comment}&quot;
               </p>
 
               {/* Informacije o korisniku */}
@@ -112,8 +121,12 @@ export default function Testimonials() {
                   {testimonial.name.charAt(0)}
                 </div>
                 <div>
-                  <h4 className="font-semibold text-primary">{testimonial.name}</h4>
-                  <p className="text-sm text-muted-foreground">{testimonial.location}</p>
+                  <h4 className="font-semibold text-primary">
+                    {testimonial.name}
+                  </h4>
+                  <p className="text-sm text-muted-foreground">
+                    {testimonial.location}
+                  </p>
                 </div>
               </div>
             </motion.div>
@@ -121,7 +134,7 @@ export default function Testimonials() {
         </div>
 
         {/* Statistike */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -129,7 +142,7 @@ export default function Testimonials() {
           viewport={{ once: true }}
         >
           <div className="text-center">
-            <div className="text-4xl font-bold text-primary mb-2">500+</div>
+            <div className="text-4xl font-bold text-primary mb-2">100+</div>
             <p className="text-muted-foreground">Zadovoljnih kupaca</p>
           </div>
           <div className="text-center">
@@ -137,7 +150,7 @@ export default function Testimonials() {
             <p className="text-muted-foreground">Prosečna ocena</p>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold text-primary mb-2">1000+</div>
+            <div className="text-4xl font-bold text-primary mb-2">300+</div>
             <p className="text-muted-foreground">Proizvoda proizvedeno</p>
           </div>
         </motion.div>
@@ -145,4 +158,3 @@ export default function Testimonials() {
     </section>
   );
 }
-

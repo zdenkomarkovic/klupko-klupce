@@ -81,11 +81,11 @@ export default function Home() {
                 viewport={{ once: true }}
               >
                 <Image
-                  src="/hero13.jpg"
+                  src="/android-chrome-512x512.png"
                   alt="handmade"
                   width={800}
                   height={800}
-                  className=" rounded-3xl "
+                  className=" rounded-full "
                 />
               </motion.div>
             </div>
