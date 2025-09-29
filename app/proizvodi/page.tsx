@@ -27,7 +27,7 @@ export default function ProizvodiPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen pt-10 flex items-center justify-center">
+      <div className="min-h-screen pt-20 flex items-center justify-center">
         Loading...
       </div>
     );
