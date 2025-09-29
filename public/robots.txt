@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://klupkoklupce.rs
+
+# Sitemaps
+Sitemap: https://klupkoklupce.rs/sitemap.xml
