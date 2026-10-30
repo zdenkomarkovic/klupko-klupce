@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { toast } from "sonner";
-import { sendMail } from "@/lib/send-mail";
+import { subscribe } from "@/lib/newsletter";
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
@@ -12,16 +12,12 @@ export default function Newsletter() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await sendMail({
-        email,
-        subject: "Nova prijava na newsletter",
-        text: `Nova prijava na newsletter: ${email}`,
-      });
-      if (res?.messageId) {
+      const res = await subscribe(email);
+      if (res.ok) {
         toast.success("Hvala! Dobrodošli u Slavijano svet.");
         setEmail("");
       } else {
-        toast.error("Prijava nije uspela. Pokušajte ponovo.");
+        toast.error(res.error ?? "Prijava nije uspela. Pokušajte ponovo.");
       }
     } catch {
       toast.error("Prijava nije uspela. Pokušajte ponovo.");
