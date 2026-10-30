@@ -1,9 +1,10 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /studio
 
 # Host
-Host: https://klupkoklupce.rs
+Host: https://slavijano.com
 
 # Sitemaps
-Sitemap: https://klupkoklupce.rs/sitemap.xml
+Sitemap: https://slavijano.com/sitemap.xml

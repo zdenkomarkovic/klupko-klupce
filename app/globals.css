@@ -2,39 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Sakrij header i footer na /studio ruti */
-body[data-path="/studio"] header,
-body[data-path="/studio"] footer,
-body[data-path="/studio"] .button-to-top {
-  display: none !important;
-}
-
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-serif), Georgia, serif;
 }
 html {
   scroll-behavior: smooth;
 }
-h2 {
-  @apply text-2xl md:text-4xl font-bold text-primary text-center;
-}
-h3 {
-  @apply text-xl md:text-3xl font-bold text-primary text-center;
-}
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
+    --background: 42 33% 95%;
+    --foreground: 0 0% 20%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 31, 94%, 55%;
-    --primary-foreground: 0 0% 98%;
+    --primary: 0 0% 32%;
+    --primary-foreground: 42 33% 97%;
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
+    --muted: 42 30% 98%;
+    --muted-foreground: 0 0% 32%;
     --accent: 0 0% 96.1%;
     --accent-foreground: 0 0% 9%;
     --destructive: 0 84.2% 60.2%;

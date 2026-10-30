@@ -1,4 +1,5 @@
 import { createClient } from '@sanity/client'
+import imageUrlBuilder from '@sanity/image-url'
 
 export const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'placeholder',
@@ -7,171 +8,69 @@ export const client = createClient({
   useCdn: process.env.NODE_ENV === 'production',
 })
 
-// Tipovi za Sanity
-export interface Product {
+const builder = imageUrlBuilder(client)
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const urlFor = (source: any) => builder.image(source)
+
+export type SectionSlug = 'poezija' | 'proza' | 'misli'
+
+export const sections: Record<
+  SectionSlug,
+  { title: string; subtitle: string }
+> = {
+  poezija: {
+    title: 'Poezija',
+    subtitle: 'Tamo gde se emocije pretvaraju u reči, a reči u muziku duše.',
+  },
+  proza: {
+    title: 'Proza',
+    subtitle: 'Mali svetovi stvoreni od mastila, sećanja i mašte.',
+  },
+  misli: {
+    title: 'Misli',
+    subtitle: 'Dnevnik jednog uma.',
+  },
+}
+
+export const isSection = (s: string): s is SectionSlug => s in sections
+
+export interface PostSummary {
   _id: string
-  _type: 'product'
   title: string
-  slug: {
-    current: string
-  }
-  description: string
-  category: {
-    _ref: string
-    _type: 'reference'
-    title?: string
-    slug?: {
-      current: string
-    }
-  }
-  images: Array<{
-    _key: string
-    asset: {
-      _ref: string
-      _type: 'reference'
-    }
-    alt?: string
-  }>
-  price?: number
-  inStock: boolean
-  featured: boolean
-  seo: {
-    title?: string
-    description?: string
-    keywords?: string[]
-  }
-  createdAt: string
-  updatedAt: string
+  slug: string
+  section: SectionSlug
+  publishedAt: string
+  excerpt?: string
+  coverImage?: { asset: { _ref: string }; alt?: string }
 }
 
-export interface Category {
-  _id: string
-  _type: 'category'
-  title: string
-  slug: {
-    current: string
-  }
-  description: string
-  image?: {
-    asset: {
-      _ref: string
-      _type: 'reference'
-    }
-    alt?: string
-  }
-  seo: {
-    title?: string
-    description?: string
-    keywords?: string[]
-  }
+export interface Post extends PostSummary {
+  body: unknown[] // Portable Text
 }
 
-export interface Page {
-  _id: string
-  _type: 'page'
-  title: string
-  slug: {
-    current: string
-  }
-  content: unknown[] // Portable Text
-  seo: {
-    title?: string
-    description?: string
-    keywords?: string[]
-  }
-}
+const summaryFields = `_id, title, "slug": slug.current, section, publishedAt, excerpt, coverImage`
 
-// Queries
-export const queries = {
-  // Proizvodi
-  allProducts: `*[_type == "product"] | order(_createdAt desc) {
-    _id,
-    title,
-    slug,
-    description,
-    category->{title, slug},
-    images[0...3],
-    price,
-    inStock,
-    featured
-  }`,
-  
-  featuredProducts: `*[_type == "product" && featured == true] | order(_createdAt desc) {
-    _id,
-    title,
-    slug,
-    description,
-    category->{title, slug},
-    images,
-    price,
-    inStock
-  }`,
-  
-  productBySlug: `*[_type == "product" && slug.current == $slug][0] {
-    _id,
-    title,
-    slug,
-    description,
-    category->{title, slug},
-    images,
-    price,
-    inStock,
-    featured,
-    seo
-  }`,
-  
-  productsByCategory: `*[_type == "product" && category->slug.current == $categorySlug] | order(_createdAt desc) {
-    _id,
-    title,
-    slug,
-    description,
-    category->{title, slug},
-    images[0...2],
-    price,
-    inStock,
-    featured
-  }`,
-  
-  // Kategorije
-  allCategories: `*[_type == "category"] | order(title asc) {
-    _id,
-    title,
-    slug,
-    description,
-    image
-  }`,
-  
-  categoryBySlug: `*[_type == "category" && slug.current == $slug][0] {
-    _id,
-    title,
-    slug,
-    description,
-    image,
-    seo
-  }`
-}
+export const getPostsBySection = (section: SectionSlug): Promise<PostSummary[]> =>
+  client.fetch(
+    `*[_type == "post" && section == $section] | order(publishedAt desc) {${summaryFields}}`,
+    { section },
+    { next: { revalidate: 60 } }
+  )
 
-// Helper funkcije
-export async function getProducts() {
-  return await client.fetch(queries.allProducts)
-}
+export const getLatestPosts = (limit = 3): Promise<PostSummary[]> =>
+  client.fetch(
+    `*[_type == "post"] | order(publishedAt desc)[0...$limit] {${summaryFields}}`,
+    { limit },
+    { next: { revalidate: 60 } }
+  )
 
-export async function getFeaturedProducts() {
-  return await client.fetch(queries.featuredProducts)
-}
+export const getPost = (section: SectionSlug, slug: string): Promise<Post | null> =>
+  client.fetch(
+    `*[_type == "post" && section == $section && slug.current == $slug][0] {${summaryFields}, body}`,
+    { section, slug },
+    { next: { revalidate: 60 } }
+  )
 
-export async function getProductBySlug(slug: string) {
-  return await client.fetch(queries.productBySlug, { slug })
-}
-
-export async function getProductsByCategory(categorySlug: string) {
-  return await client.fetch(queries.productsByCategory, { categorySlug })
-}
-
-export async function getCategories() {
-  return await client.fetch(queries.allCategories)
-}
-
-export async function getCategoryBySlug(slug: string) {
-  return await client.fetch(queries.categoryBySlug, { slug })
-}
+export const getAllPostPaths = (): Promise<{ section: SectionSlug; slug: string }[]> =>
+  client.fetch(`*[_type == "post"]{ section, "slug": slug.current }`)

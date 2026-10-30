@@ -3,38 +3,45 @@ import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './sanity/schemas'
 
+const sections = [
+  { title: 'Poezija', value: 'poezija' },
+  { title: 'Proza', value: 'proza' },
+  { title: 'Misli', value: 'misli' },
+]
+
 export default defineConfig({
-  name: 'klupko-klupce',
-  title: 'Klupko Klupče CMS',
-  
+  name: 'slavijano',
+  title: 'Slavijano CMS',
+
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
-  
-  
+
   plugins: [
     structureTool({
       structure: (S) =>
         S.list()
           .title('Sadržaj')
           .items([
+            ...sections.map((s) =>
+              S.listItem()
+                .title(s.title)
+                .child(
+                  S.documentList()
+                    .title(s.title)
+                    .filter('_type == "post" && section == $section')
+                    .params({ section: s.value })
+                    .defaultOrdering([{ field: 'publishedAt', direction: 'desc' }])
+                )
+            ),
+            S.divider(),
             S.listItem()
-              .title('Kategorije')
-              .child(
-                S.documentTypeList('category')
-                  .title('Kategorije proizvoda')
-              ),
-            S.listItem()
-              .title('Proizvodi')
-              .child(
-                S.documentTypeList('product')
-                  .title('Proizvodi')
-                  .filter('_type == "product"')
-              ),
-          ])
+              .title('Svi tekstovi')
+              .child(S.documentTypeList('post').title('Svi tekstovi')),
+          ]),
     }),
-    visionTool()
+    visionTool(),
   ],
-  
+
   schema: {
     types: schemaTypes,
   },

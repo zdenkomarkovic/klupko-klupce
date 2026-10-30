@@ -1,10 +1,10 @@
 {
-  "name": "Klupko klupce proizvodi od vune",
-  "short_name": "Klupko klupce",
+  "name": "Slavijano – poezija, proza i misli",
+  "short_name": "Slavijano",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "background_color": "#f7f4ee",
+  "theme_color": "#4d4d4d",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

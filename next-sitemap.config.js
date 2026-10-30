@@ -1,51 +1,37 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: "https://klupkoklupce.rs",
+  siteUrl: "https://slavijano.com",
   generateRobotsTxt: true,
   outDir: "./public",
   sitemapSize: 5000,
-  changefreq: "daily",
+  changefreq: "weekly",
   priority: 0.7,
+  exclude: ["/studio", "/studio/*"],
 
-  // Ovde dodajemo dinamičke rute
-  additionalPaths: async (config) => {
-    let paths = [];
+  // Pojedinačni tekstovi iz Sanity-ja
+  additionalPaths: async () => {
+    const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+    const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
+    if (!projectId) return [];
 
     try {
-      // --- KATEGORIJE ---
-      const catRes = await fetch("https://klupkoklupce.rs/api/categories");
-      if (catRes.ok) {
-        const categories = await catRes.json();
-
-        paths = paths.concat(
-          categories.map((cat) => ({
-            loc: `/proizvodi/${cat.slug}`, // umesto [slug]
-            changefreq: "daily",
-            priority: 0.7,
-          }))
-        );
-      }
-
-      // --- PROIZVODI ---
-      const prodRes = await fetch("https://klupkoklupce.rs/api/products");
-      if (prodRes.ok) {
-        const products = await prodRes.json();
-
-        paths = paths.concat(
-          products.map((prod) => ({
-            loc: `/proizvodi/${prod.categorySlug}/${prod.slug}`, // umesto [slug]/[productSlug]
-            changefreq: "daily",
-            priority: 0.7,
-          }))
-        );
-      }
-    } catch (err) {
-      console.error(
-        "❌ Greška pri generisanju dinamičkih ruta za sitemap:",
-        err
+      const query = encodeURIComponent(
+        '*[_type == "post"]{ section, "slug": slug.current, publishedAt }'
       );
+      const res = await fetch(
+        `https://${projectId}.apicdn.sanity.io/v2024-01-01/data/query/${dataset}?query=${query}`
+      );
+      if (!res.ok) return [];
+      const { result } = await res.json();
+      return result.map((p) => ({
+        loc: `/${p.section}/${p.slug}`,
+        lastmod: p.publishedAt,
+        changefreq: "monthly",
+        priority: 0.7,
+      }));
+    } catch (err) {
+      console.error("Greška pri generisanju ruta za sitemap:", err);
+      return [];
     }
-
-    return paths;
   },
 };
